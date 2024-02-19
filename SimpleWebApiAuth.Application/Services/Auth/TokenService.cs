@@ -18,7 +18,10 @@ namespace SimpleWebApiAuth.Application.Services.Auth
         public string GenerateToken(ApplicationUser user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration.GetSection("Authentication:SecretKey").Value!);
+            var secretKey = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("Authentication__SecretKey"))
+                ? configuration.GetSection("Authentication:SecretKey").Value
+                : Environment.GetEnvironmentVariable("Authentication__SecretKey");
+            var key = Encoding.ASCII.GetBytes(secretKey!);
 
             var claims = user.Claims.Select(claim => new Claim(claim.Type, claim.Value)).ToList();
             claims.Add(new Claim(ClaimTypes.Name, user.UserName!));

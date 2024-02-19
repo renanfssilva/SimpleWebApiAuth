@@ -15,15 +15,17 @@ namespace SimpleWebApiAuth.API.Configuration
                 .AddPolicy("User", policy => policy.RequireRole(Settings.CommonRole));
 
             var connectionString = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UserDatabase__ConnectionString"))
-                ? builder.Configuration.GetConnectionString("DefaultConnection")
-                : Environment.GetEnvironmentVariable("UserDatabase__ConnectionString");
+                                            ? builder.Configuration.GetConnectionString("DefaultConnection")
+                                            : Environment.GetEnvironmentVariable("UserDatabase__ConnectionString");
 
             var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
             {
                 MongoDbSettings = new MongoDbSettings
                 {
                     ConnectionString = connectionString,
-                    DatabaseName = builder.Configuration.GetSection("UserDatabase:DatabaseName").Value
+                    DatabaseName = string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UserDatabase__DatabaseName"))
+                                            ? builder.Configuration.GetSection("UserDatabase:DatabaseName").Value
+                                            : Environment.GetEnvironmentVariable("UserDatabase__DatabaseName")
                 },
                 IdentityOptionsAction = identity =>
                 {
