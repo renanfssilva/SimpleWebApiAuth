@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  simplewebapiauth.api:
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://0.0.0.0:80
+        - UserDatabase__ConnectionString=mongodb://renan:123456@nosqldata:27017/admin
+        - UserDatabase__DatabaseName=IdentityDb
+        - BookStoreDatabase__ConnectionString=mongodb://renan:123456@nosqldata:27017/admin
+        - BookStoreDatabase__DatabaseName=BookStore
+        - BookStoreDatabase__BooksCollectionName=Books
+        - Authentication__SecretKey=156dae95c5764467863a54b3248fd15e
+        - Kestrel__Certificates__Development__Password=8c6ca55c-1e2b-4c27-86d6-6073ec744696
+    image: ${DOCKER_REGISTRY-}simplewebapiauthapi
+    build:
+      context: .
+      dockerfile: SimpleWebApiAuth.API/Dockerfile
+    ports:
+        - 8082:80
+    depends_on:
+        - nosqldata
+
+  nosqldata:
+    environment:
+        - MONGO_INITDB_ROOT_USERNAME=renan
+        - MONGO_INITDB_ROOT_PASSWORD=123456
+        - MONGO_INITDB_DATABASE=admin
+    image: mongo
+    ports:
+        - "27017:27017"
