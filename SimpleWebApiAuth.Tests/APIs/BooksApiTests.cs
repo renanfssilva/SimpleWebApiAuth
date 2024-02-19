@@ -8,89 +8,16 @@ using SimpleWebApiAuth.Domain.Books;
 using SimpleWebApiAuth.Domain.Identity;
 using SimpleWebApiAuth.Infrastructure;
 using SimpleWebApiAuth.Tests.Fixtures;
+using SimpleWebApiAuth.Tests.Helpers;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace SimpleWebApiAuth.Tests
+namespace SimpleWebApiAuth.Tests.APIs
 {
     public class BooksApiTests
     {
         private readonly ICrudService<Book> _booksService = Substitute.For<ICrudService<Book>>();
-
-        #region Unauthorized Tests
-
-        [Fact]
-        public async Task GetBooks_ReturnUnauthorized_WhenCallerIsNotAuthorized()
-        {
-            //Arrange
-            using var app = new WebApplicationFactory<Program>();
-            var httpClient = app.CreateClient();
-
-            //Act
-            var response = await httpClient.GetAsync($"/books");
-
-            //Assert
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task GetBookById_ReturnUnauthorized_WhenCallerIsNotAuthorized()
-        {
-            //Arrange
-            using var app = new WebApplicationFactory<Program>();
-            var httpClient = app.CreateClient();
-
-            //Act
-            var response = await httpClient.GetAsync($"/books/123456");
-
-            //Assert
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task PostBook_ReturnUnauthorized_WhenCallerIsNotAuthorized()
-        {
-            //Arrange
-            using var app = new WebApplicationFactory<Program>();
-            var httpClient = app.CreateClient();
-
-            //Act
-            var response = await httpClient.PostAsync($"/books", new StringContent("test", Encoding.UTF8, "application/json"));
-
-            //Assert
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task PutBook_ReturnUnauthorized_WhenCallerIsNotAuthorized()
-        {
-            //Arrange
-            using var app = new WebApplicationFactory<Program>();
-            var httpClient = app.CreateClient();
-
-            //Act
-            var response = await httpClient.PutAsync($"/books/123456", new StringContent("test", Encoding.UTF8, "application/json"));
-
-            //Assert
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task DeleteBook_ReturnUnauthorized_WhenCallerIsNotAuthorized()
-        {
-            //Arrange
-            using var app = new WebApplicationFactory<Program>();
-            var httpClient = app.CreateClient();
-
-            //Act
-            var response = await httpClient.DeleteAsync($"/books/123456");
-
-            //Assert
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        }
-
-        #endregion
 
         #region Successful Tests
 
@@ -233,6 +160,80 @@ namespace SimpleWebApiAuth.Tests
 
             //Assert
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
+        }
+
+        #endregion
+
+        #region Unauthorized Tests
+
+        [Fact]
+        public async Task GetBooks_ReturnUnauthorized_WhenCallerIsNotAuthorized()
+        {
+            //Arrange
+            using var app = new WebApplicationFactory<Program>();
+            var httpClient = app.CreateClient();
+
+            //Act
+            var response = await httpClient.GetAsync($"/books");
+
+            //Assert
+            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task GetBookById_ReturnUnauthorized_WhenCallerIsNotAuthorized()
+        {
+            //Arrange
+            using var app = new WebApplicationFactory<Program>();
+            var httpClient = app.CreateClient();
+
+            //Act
+            var response = await httpClient.GetAsync($"/books/123456");
+
+            //Assert
+            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task PostBook_ReturnUnauthorized_WhenCallerIsNotAuthorized()
+        {
+            //Arrange
+            using var app = new WebApplicationFactory<Program>();
+            var httpClient = app.CreateClient();
+
+            //Act
+            var response = await httpClient.PostAsync($"/books", new StringContent("test", Encoding.UTF8, "application/json"));
+
+            //Assert
+            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task PutBook_ReturnUnauthorized_WhenCallerIsNotAuthorized()
+        {
+            //Arrange
+            using var app = new WebApplicationFactory<Program>();
+            var httpClient = app.CreateClient();
+
+            //Act
+            var response = await httpClient.PutAsync($"/books/123456", new StringContent("test", Encoding.UTF8, "application/json"));
+
+            //Assert
+            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task DeleteBook_ReturnUnauthorized_WhenCallerIsNotAuthorized()
+        {
+            //Arrange
+            using var app = new WebApplicationFactory<Program>();
+            var httpClient = app.CreateClient();
+
+            //Act
+            var response = await httpClient.DeleteAsync($"/books/123456");
+
+            //Assert
+            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
 
         #endregion

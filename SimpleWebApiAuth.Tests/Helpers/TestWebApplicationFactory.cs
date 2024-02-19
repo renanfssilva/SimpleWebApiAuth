@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace SimpleWebApiAuth.Tests
+namespace SimpleWebApiAuth.Tests.Helpers
 {
     public class TestWebApplicationFactory : WebApplicationFactory<Program>
     {

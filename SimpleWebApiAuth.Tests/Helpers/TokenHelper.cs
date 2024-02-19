@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SimpleWebApiAuth.Tests
+namespace SimpleWebApiAuth.Tests.Helpers
 {
     public static class TokenHelper
     {
