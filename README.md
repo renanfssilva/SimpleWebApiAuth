@@ -19,7 +19,7 @@ To run the application locally using Docker, follow these steps:
 
 1. Clone the repository to your local machine:
 ```bash
-git clone <repository-url>
+git clone https://github.com/renanfssilva/SimpleWebApiAuth.git
 cd SimpleWebApiAuth
 ```
 
@@ -29,7 +29,7 @@ docker compose -f docker-compose.yml up
 ```
 
 3. Access the API endpoints:
-Once the containers are up and running, you can access the API endpoints using a tool like Postman or Swagger. The API documentation should be available at http://localhost:<port>/swagger/index.html, where <port> is the port mapped to the API container.
+Once the containers are up and running, you can access the API endpoints using a tool like Postman or Swagger. The API documentation should be available at `http://localhost:<port>/swagger/index.html`, where `<port>` is the port mapped to the API container.
 
 ## API Endpoints
 POST /signup: Registers a new user.
