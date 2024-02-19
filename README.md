@@ -29,7 +29,7 @@ docker compose -f docker-compose.yml up
 ```
 
 3. Access the API endpoints:
-Once the containers are up and running, you can access the API endpoints using a tool like Postman or Swagger. The API documentation should be available at http://localhost:<port>/swagger/index.html, where <port> is the port mapped to the API container.
+Once the containers are up and running, you can access the API endpoints using a tool like Postman or Swagger. The API documentation should be available at `http://localhost:<port>/swagger/index.html`, where `<port>` is the port mapped to the API container.
 
 ## API Endpoints
 POST /signup: Registers a new user.
