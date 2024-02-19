@@ -19,7 +19,7 @@ To run the application locally using Docker, follow these steps:
 
 1. Clone the repository to your local machine:
 ```bash
-git clone <repository-url>
+git clone https://github.com/renanfssilva/SimpleWebApiAuth.git
 cd SimpleWebApiAuth
 ```
 
